@@ -7,24 +7,26 @@ Description: Create a program to run a dictionary attack to test for brute force
 
 
 class dictAttack(object):
-    def __init__():
+    def __init__(self):
         self.wordList = []
         self.popularPassword = []
         self.replacements = {}
         
-    def readDictFile(self,filename):
-        with open(filename) as f:
-            for line in f:
-                self.wordList.append(line)
-
-    def readCommonPassFile(self,filename):
-        with open(filename) as f:
-            for line in f:
-                self.popularPassword.append(line)
 
     #These are a series of True False variables used to denote the extent of the attack
     def execAttack(self,replacements,numbers,caseSensitive,engageFullDict):
         
+         
+        def readDictFile(filename):
+            with open(filename) as f:
+                for line in f:
+                    self.wordList.append(line)
+
+        def readCommonPassFile(filename):
+            with open(filename) as f:
+                for line in f:
+                    self.popularPassword.append(line)
+
         #Always try most common passwords
         readCommonPassFile('DataSets/CommonPassword.txt')
 
@@ -37,11 +39,14 @@ class dictAttack(object):
         
 
         for i in self.popularPassword:
-            if i == PASSWORD:
+            if str(i.strip())  == str(PASSWORD.strip()):
                 return 200
-        
         for i in self.wordList:
             if i == PASSWORD:
                 return 200
         return 404
+
+
+myAttack = dictAttack()
+print(myAttack.execAttack(False,False,False,False))
 
