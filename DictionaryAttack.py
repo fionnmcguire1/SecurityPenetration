@@ -12,7 +12,8 @@ class dictAttack(object):
         self.popularPassword = []
         self.replacements = {}
         
-
+    #TODO Develop for special char _%$@€
+    #Combine some of the modes if password is john1983 it could also be John_1983
     #These are a series of True False variables used to denote the extent of the attack
     def execAttack(self,replacements,numbers,caseSensitive,engageFullDict):
         
@@ -41,6 +42,10 @@ class dictAttack(object):
         for i in self.popularPassword:
             if str(i.strip())  == str(PASSWORD.strip()):
                 return 200
+            elif numbers == True:
+                for num in range(10000):
+                    if str(i.strip())+str(num)  == str(PASSWORD.strip()):
+                        return 200
         for i in self.wordList:
             if i == PASSWORD:
                 return 200
